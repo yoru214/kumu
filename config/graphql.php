@@ -77,6 +77,7 @@ return [
             'query' => [
                 // ExampleQuery::class,
                 'GitHubUsers' => App\GraphQL\Queries\GitHubUsersQuery::class,
+                'Authenticate' => App\GraphQL\Queries\AuthenticateQuery::class,
             ],
             'mutation' => [
                 // ExampleMutation::class,
@@ -85,6 +86,7 @@ return [
             'types' => [
                 // ExampleType::class,
                 'GitHubUser' => App\GraphQL\Types\GitHubUserType::class,
+                'Auth' => App\GraphQL\Types\AuthType::class,
             ],
 
             // Laravel HTTP middleware

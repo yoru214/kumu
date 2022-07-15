@@ -6,8 +6,10 @@ use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
 use GraphQL\Type\Definition\ResolveInfo;
-use \Cache;
 use Illuminate\Support\Facades\Redis;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\JWTAuth;
+use Illuminate\Support\Facades\Auth;
 use Closure;
 use Log;
 
@@ -17,6 +19,20 @@ class GitHubUsersQuery extends Query
         'name' => 'GitHubUsers',
     ];
 
+    private $jwt;
+    public function __construct(JWTAuth $jwt)
+    {
+        $this->jwt = $jwt;
+    }
+    public function authorize($root, array $args, $ctx, ResolveInfo $resolveInfo = null, Closure $getSelectFields = null): bool
+    {
+        try {
+            $this->auth =$this->jwt->parseToken()->authenticate();
+        } catch (\Exception $e) {
+            $this->auth = null;
+        }
+        return (boolean) $this->auth;
+    }
     public function type(): Type
     {
         return Type::listOf(GraphQL::type('GitHubUser'));
@@ -42,6 +58,7 @@ class GitHubUsersQuery extends Query
 
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
+        $currentUser = Auth::user();
         $gitHubUsers = [];
         // Connect to Redis.
         $redis = Redis::connection();
@@ -51,7 +68,7 @@ class GitHubUsersQuery extends Query
         // Loop to all usernames
         foreach($args['usernames'] as $gitHubUser) {
             // check if already cached
-            if($data = Redis::get($gitHubUser)) {
+            if($data = Redis::get($currentUser->id . "." . $gitHubUser)) {
                 $userData = json_decode($data, true);
             } else {
                 // Get data from GitHub.
@@ -79,7 +96,7 @@ class GitHubUsersQuery extends Query
                     // Gets the response bod text
                     $response = $response->getBody();
                     // Adds to Redis cache an should be kept for exactly 2 minutes.
-                    Redis::setex($gitHubUser, 120, $response);    
+                    Redis::setex($currentUser->id . "." . $gitHubUser, 120, $response);    
                     // sets the user data that is intended to be added to the return list.
                     $userData = json_decode($response, true);
                 } 
