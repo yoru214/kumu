@@ -63,7 +63,12 @@ List of necessary applications and modules for the project to be able to run.
     ```
     ./vendor/bin/sail up --build
     ```
-4. Configure the application using PHP Artisan
+
+4. Configure Enviroment values
+
+    Copy all values from `.env.example` to `.env`
+    
+5. Configure the application using PHP Artisan
     Once the build is finished, open another terminal and go to the `kumu` directory and run the following command: 
     ```
     php artisan migrate
@@ -278,7 +283,6 @@ The application uses `GraphQL` thus we will assume each query and mutation as a 
     6. `AvgFollowersPerRepo`
 
         The average number of followers per public repository (ie. number of followers divided by the number of public repositories)
-
 
 
 ### Test Application using `Postman`
