@@ -65,7 +65,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvZ3JhcGhxbCIsImlhdCI6MTY1Nzk1MzkxNiwiZXhwIjoxNjU3OTU3NTE2LCJuYmYiOjE2NTc5NTM5MTYsImp0aSI6InJ5bGFxVnJGRXYyeWdRM00iLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.qdP6oCsjggKU68ECH7DryO3D6gD_LsHqIxmO3Des9oQ",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAiLCJpYXQiOjE2NTc5NjA0MjAsImV4cCI6MTY1Nzk2NDAyMCwibmJmIjoxNjU3OTYwNDIwLCJqdGkiOiJRdmZMTzR0TmpCdE5DYlhvIiwic3ViIjoiNCIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.svtz5XkIHshXP52ai5ZVb_R5JgRG7ALyMJQn52GQc6k",
 							"type": "string"
 						}
 					]
@@ -112,13 +112,6 @@
 					""
 				]
 			}
-		}
-	],
-	"variable": [
-		{
-			"key": "personalAccessToken",
-			"value": "",
-			"type": "default"
 		}
 	]
 }

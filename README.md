@@ -307,37 +307,64 @@ The application uses `GraphQL` thus we will assume each query and mutation as a 
 
     Import this collection to your `Postman` application
 
+    ![Open Import Collection Dialog](postman/images/01_click_import.png)
+    
+    ![Import File](postman/images/02_import_file.png)
+
+    ![File Imported](postman/images/03_imported.png)
+
 2. Register User
 
     Click the `Register` request on the collection.
 
+    ![Register Request](postman/images/04_register_request.png)
+
     Go to Body -> GraphQL
+
+    ![Go to Body -> GraphQL ](postman/images/05_register_body.png)
 
     The `QUERY` and  `GRAPHQL VARIABLES` fields should already have sample content.
 
     You may change the variable values as you please.
 
+    ![Variables ](postman/images/06_register_variables.png)
+
     But take note to only change the values.
 
     Click the `Send` button.
 
+    ![Send ](postman/images/07_register_send.png)
+
     You will see a result similar to the following:
+
+    ![Result ](postman/images/08_register_result.png)
 
 3. Authenticate
 
     Click the `Authenticate` request on the collection.
 
+    
+    ![Click Authenticate ](postman/images/09_authenticate_request.png)
+
     Go to Body -> GraphQL
+
+    ![Go to Body -> GraphQL ](postman/images/10_authenticate_body.png)
 
     The `QUERY` and  `GRAPHQL VARIABLES` fields should already have sample content.
 
     You may change the variable values as you please.
 
+    ![Variables ](postman/images/11_authenticate_variables.png)
+
     But take note to only change the values.
 
     Click the `Send` button.
 
+    ![Send ](postman/images/12_authenticate_send.png)
+
     You will see a result similar to the following:
+
+    ![Result ](postman/images/13_authenticate_result.png)
 
 
 
@@ -345,23 +372,39 @@ The application uses `GraphQL` thus we will assume each query and mutation as a 
  
     Click the `List GitHub Users` request on the collection.
 
+    ![Click List ](postman/images/14_list_request.png)
+
     Go to the `Authorization` Tab.
+
+    ![Go to Authorization ](postman/images/15_list_authorization.png)
 
     Set `Type` to `Bearer Token`.
 
+    ![Type to Bearer Token ](postman/images/16_list_type.png)
+
     Paste the `Token` you got from a valid `Authenticate` call to the Token field.
 
+    ![Set Token ](postman/images/17_list_token.png)
+
     Go to Body -> GraphQL
+
+    ![Go to Body -> GraphQL ](postman/images/18_list_body.png)
 
     The `QUERY` and  `GRAPHQL VARIABLES` fields should already have sample content.
 
     You may change the variable values as you please.
 
+    ![Variables](postman/images/19_list_variables.png)
+
     But take note to only change the values.
 
     Click the `Send` button.
 
+    ![Send ](postman/images/20_list_send.png)
+
     You will see a result similar to the following:
-    
+
+    ![Results](postman/images/21_list_results.png)
+
 
 ## Bonus Challenge (Optional)
