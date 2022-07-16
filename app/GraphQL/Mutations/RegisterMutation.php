@@ -70,6 +70,6 @@ class RegisterMutation extends Mutation
         $user     = User::create(['name' => isset($args['name']) ? $args['name'] : '', 'email' => $args['email'], 'password' => Hash::make($args['password'])]);
         $token = $this->jwt->attempt($args);
         
-        return ["ID"=>$user->id,"Email"=>$user->email,"Token"=>$token];
+        return ["ID"=>$user->id,"Email"=>$user->email,"Name"=>$user->name,"Token"=>$token];
     }
 }

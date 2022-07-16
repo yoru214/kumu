@@ -5,7 +5,7 @@ declare(strict_types = 1);
 return [
     'route' => [
         // The prefix for routes; do NOT use a leading slash!
-        'prefix' => 'graphql',
+        'prefix' => '',
 
         // The controller/method to use in GraphQL request.
         // Also supported array syntax: `[\Rebing\GraphQL\GraphQLController::class, 'query']`

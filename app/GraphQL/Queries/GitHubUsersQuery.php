@@ -82,11 +82,16 @@ class GitHubUsersQuery extends Query
                     );
                 // Catches Exceptions so process can continue when errors occurs.
                 } catch (\GuzzleHttp\Exception\ClientException $e) {
+                    var_dump($e);
                     $response = $e->getResponse();
                     // If username is not found in GitHub, which triggered the  404 not found status,
                     // will log that user was not found.
                     if ($response && $response->getStatusCode() == 404) {
                         Log::notice($gitHubUser.' does not have a Github account.');
+                    } else {
+                        // Something is wrong
+                        return Error::createLocatedError('Something went wrong. Please check `laravel.log` for more details.');
+
                     }
                 }
                 $statusCode = $response->getStatusCode();

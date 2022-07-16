@@ -69,6 +69,6 @@ class AuthenticateQuery extends Query
         // Get logged User detail
         $user = Auth::user();
 
-        return ["ID"=>$user->id,"Email"=>$user->email,"Token"=>$token];
+        return ["ID"=>$user->id,"Email"=>$user->email,"Name"=>$user->name,"Token"=>$token];
     }
 }
