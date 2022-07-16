@@ -1,0 +1,124 @@
+{
+	"info": {
+		"_postman_id": "6dcc3561-30c2-4389-9bee-6aeb9c10e691",
+		"name": "kumu",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation Register ($email: String!, $password: String!, $name: String){\r\n    Register (email:$email, password: $password, name: $name) {\r\n        ID\r\n        Name\r\n        Email\r\n        Token\r\n    }\r\n\r\n}",
+						"variables": "{\r\n    \"name\": \"User\",\r\n    \"email\": \"user@mail.com\",\r\n    \"password\":\"12345678\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authenticate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query Authenticate ($email: String!, $password: String!){\r\n    Authenticate (email:$email, password: $password) {\r\n        ID\r\n        Name\r\n        Email\r\n        Token\r\n    }\r\n}",
+						"variables": "{\r\n    \"email\": \"user@mail.com\",\r\n    \"password\":\"12345678\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List GitHub Users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvZ3JhcGhxbCIsImlhdCI6MTY1Nzk1MzkxNiwiZXhwIjoxNjU3OTU3NTE2LCJuYmYiOjE2NTc5NTM5MTYsImp0aSI6InJ5bGFxVnJGRXYyeWdRM00iLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.qdP6oCsjggKU68ECH7DryO3D6gD_LsHqIxmO3Des9oQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query GitHubUsers ($usernames: [String]!) {\r\n    GitHubUsers (usernames: $usernames) {\r\n        Name\r\n        Login\r\n        Company\r\n        NumFollowers\r\n        NumPublicRepo\r\n        AvgFollowersPerRepo\r\n    }\r\n}",
+						"variables": "\r\n{\r\n    \"usernames\": [\r\n        \"pjhyett\"\r\n    ]\r\n\r\n    \r\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "personalAccessToken",
+			"value": "",
+			"type": "default"
+		}
+	]
+}

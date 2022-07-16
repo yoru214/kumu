@@ -216,9 +216,21 @@ The application uses `GraphQL` thus we will assume each query and mutation as a 
         Refers to the string token that will be used for authentication when accessing the main endpoint using the authenticated user.
 
 
-3. Get GitHub Users
+3. List GitHub Users
 
     This endpoint is where we try to access details of a list of GitHub users.
+
+    <b><font color="red">IMPORTANT!!!</font> </b>
+
+    You have to place the `Token` that was derived from the `Authenticate` endpoint to your request header as 
+    ```
+    Authorization: Bearer
+    ```
+
+    You can refer to this site how to set them on your request:
+
+    [Curl Request With Bearer Token Authorization Header](https://reqbin.com/req/c-hlt4gkzd/curl-bearer-token-authorization-header-example)
+
 
     <b>`Query`</b>
 
@@ -286,5 +298,70 @@ The application uses `GraphQL` thus we will assume each query and mutation as a 
 
 
 ### Test Application using `Postman`
+
+1. Setting up `Postman`, import collection
+
+    On this repository, you will see a directory named `postman`.
+
+    Inside the directory is a postman collection named `kumu.postman_collection.json`.
+
+    Import this collection to your `Postman` application
+
+2. Register User
+
+    Click the `Register` request on the collection.
+
+    Go to Body -> GraphQL
+
+    The `QUERY` and  `GRAPHQL VARIABLES` fields should already have sample content.
+
+    You may change the variable values as you please.
+
+    But take note to only change the values.
+
+    Click the `Send` button.
+
+    You will see a result similar to the following:
+
+3. Authenticate
+
+    Click the `Authenticate` request on the collection.
+
+    Go to Body -> GraphQL
+
+    The `QUERY` and  `GRAPHQL VARIABLES` fields should already have sample content.
+
+    You may change the variable values as you please.
+
+    But take note to only change the values.
+
+    Click the `Send` button.
+
+    You will see a result similar to the following:
+
+
+
+4. List GitHub Users
+ 
+    Click the `List GitHub Users` request on the collection.
+
+    Go to the `Authorization` Tab.
+
+    Set `Type` to `Bearer Token`.
+
+    Paste the `Token` you got from a valid `Authenticate` call to the Token field.
+
+    Go to Body -> GraphQL
+
+    The `QUERY` and  `GRAPHQL VARIABLES` fields should already have sample content.
+
+    You may change the variable values as you please.
+
+    But take note to only change the values.
+
+    Click the `Send` button.
+
+    You will see a result similar to the following:
+    
 
 ## Bonus Challenge (Optional)
