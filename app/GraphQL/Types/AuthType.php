@@ -20,9 +20,17 @@ class AuthType extends GraphQLType
                 'type' => Type::nonNull(Type::id()),
                 'description' => 'ID of the User'
             ],
+            'Name' => [
+                'type' => Type::string(),
+                'description' => 'Name of the User.'
+            ],
+            'Email' => [
+                'type' => Type::nonNull(Type::string()),
+                'description' => 'Email of the User which also serves as the Username.'
+            ],
             'Token' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Authenticated Token'
+                'description' => 'Authenticated Token.'
             ]
         ];
     }

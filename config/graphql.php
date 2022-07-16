@@ -81,6 +81,7 @@ return [
             ],
             'mutation' => [
                 // ExampleMutation::class,
+                'Register' => App\GraphQL\Mutations\RegisterMutation::class,
             ],
             // The types only available in this schema
             'types' => [
