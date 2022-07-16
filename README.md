@@ -1,10 +1,18 @@
 # About
 
-This project is created for code evaluation that will be used by kumu.
+This project is created for code evaluation that will be used by kumu.ph.
 
 ## API Challenge
 
 ### Introduction
+Technology to be used:
+- PHP
+- Redis
+- MySQL
+- Choose a framework that you are familiar with.
+
+<b>Challenge 1:</b>
+
 Create PHP API project that has an API endpoint that takes a list of github usernames (up to a maximum of 10 names) and returns to the user a list of basic information for those users including:
 - Name
 - Login
@@ -28,20 +36,46 @@ https://api.github.com/users/{username}
 - Provide a Readme.md with instructions on how to execute your API endpoint
 
 
-### Prerequesites
+### Additional Technologies
+
+Since I am allowed to use my own framework, some additional technologies were added for the API to meet the requirements.
+
+- <b>Laravel</b>
+
+    PHP framework that will take care database and cache connectivity
+
+- <b>GraphQL</b>
+
+    Used to simplify the API functions and add more strict validations and other features.
+
+- <b>JWT</b>
+
+    Used to manage user authentication when using the API
+
+### Pre-requesites
 List of necessary applications and modules for the project to be able to run.
 - Composer
+
+    Used as dependency management for the modules and packages installed for the API to run.
+
 - Laravel Sail
+
+    Used to containerize development and easier test deployment.
+
 - PHP Artisan
+
+    Use to manage data migration and other functions
+
 - Postman
-- MySQL Client GUI for better data viewing (e.g. SQLYog which is used in the examples.)
+
+    Use to interact and test the API without the need of creating a frontend application.
 
 
 ### Installation/Configuration
 1. Clone/Download the Repository
 
     Open the terminal or command prompt and go to the directory you want to clone the application and do the following command:
-    ```
+    ```shell
     git clone https://github.com/yoru214/kumu.git
     ```
     This will download the project source code.
@@ -49,34 +83,53 @@ List of necessary applications and modules for the project to be able to run.
 2. Install the application using Composer
 
     Go to the `kumu` directory by using this command:
-    ```
+    ```shell
     cd kumu
     ```
     Run the following command to install
-    ```
+    ```shell
     composer install
     ```
     This will download and install the necessary dependencies.
 
-3. Build the application via Laravel Sail
-    Build the application on laravel sail containers using the following command:
-    ```
-    ./vendor/bin/sail up --build
-    ```
+    
+3. Configure Enviroment values
 
-4. Configure Enviroment values
+    Create `.env` file.
 
+    ```shell
+    touch .env
+    ```
+    
     Copy all values from `.env.example` to `.env`
+
+    <font color="red"><b>IMPORTANT!!!</b>    
+
+    You need to configure to do this step before proceeding.
+    
+    If not it will cause issues on your containers and will force you to reinstall and remove the created containers.
+    </font>
+
+
+4. Build the application via Laravel Sail
+    Build the application on laravel sail containers using the following command:
+    ```shell
+    ./vendor/bin/sail up --build -d
+    ```
+      
     
 5. Configure the application using PHP Artisan
-    Once the build is finished, open another terminal and go to the `kumu` directory and run the following command: 
-    ```
+
+    Once the build is finished, do the following command: 
+    ```shell
     php artisan migrate
     ```
     This will setup the database tables needed for the application to run.
+
 5. Run the application
+
     After the migration, run the laravel app using the following command:
-    ```
+    ```shell
     php artisan serve
     ```
     This will allow us to access the API via `localhost` at port `8000`
@@ -97,7 +150,7 @@ The application uses `GraphQL` thus we will assume each query and mutation as a 
     To register a user, we have to use the `Register` mutation.
 
     <b>`Query:`</b>
-    ```
+    ```graphql
     mutation Register ($email: String!, $password: String!, $name: String){
         Register (email:$email, password: $password, name: $name) {
             ID
@@ -111,7 +164,7 @@ The application uses `GraphQL` thus we will assume each query and mutation as a 
 
 
     <b>`Variables:`</b>
-    ```
+    ```graphql
     {
         "name": "User",
         "email": "user@mail.com",
@@ -164,7 +217,7 @@ The application uses `GraphQL` thus we will assume each query and mutation as a 
 
     <b>`Query`</b>
 
-    ```
+    ```graphql
     query Authenticate ($email: String!, $password: String!){
         Authenticate (email:$email, password: $password) {
             ID
@@ -177,7 +230,7 @@ The application uses `GraphQL` thus we will assume each query and mutation as a 
 
     <b>`Variables:`</b>
 
-    ```
+    ```graphql
     {
         "email": "user@mail.com",
         "password":"12345678"
@@ -234,7 +287,7 @@ The application uses `GraphQL` thus we will assume each query and mutation as a 
 
     <b>`Query`</b>
 
-    ```
+    ```graphql
     query GitHubUsers ($usernames: [String]!) {
         GitHubUsers (usernames: $usernames) {
             Name
@@ -249,7 +302,7 @@ The application uses `GraphQL` thus we will assume each query and mutation as a 
 
     <b>`Variables:`</b>
 
-    ```
+    ```graphql
     {
         "usernames": [
             "pjhyett",
@@ -301,70 +354,70 @@ The application uses `GraphQL` thus we will assume each query and mutation as a 
 
 1. Setting up `Postman`, import collection
 
-    On this repository, you will see a directory named `postman`.
+    On this repository, you will see a directory named `documentation`, then inside is another directory named `postman`.
 
-    Inside the directory is a postman collection named `kumu.postman_collection.json`.
+    Inside the `postman` directory is a postman collection named `kumu.postman_collection.json`.
 
     Import this collection to your `Postman` application
 
-    ![Open Import Collection Dialog](postman/images/01_click_import.png)
+    ![Open Import Collection Dialog](documentation/postman/images/01_click_import.png)
     
-    ![Import File](postman/images/02_import_file.png)
+    ![Import File](documentation/postman/images/02_import_file.png)
 
-    ![File Imported](postman/images/03_imported.png)
+    ![File Imported](documentation/postman/images/03_imported.png)
 
 2. Register User
 
     Click the `Register` request on the collection.
 
-    ![Register Request](postman/images/04_register_request.png)
+    ![Register Request](documentation/postman/images/04_register_request.png)
 
     Go to Body -> GraphQL
 
-    ![Go to Body -> GraphQL ](postman/images/05_register_body.png)
+    ![Go to Body -> GraphQL ](documentation/postman/images/05_register_body.png)
 
     The `QUERY` and  `GRAPHQL VARIABLES` fields should already have sample content.
 
     You may change the variable values as you please.
 
-    ![Variables ](postman/images/06_register_variables.png)
+    ![Variables ](documentation/postman/images/06_register_variables.png)
 
     But take note to only change the values.
 
     Click the `Send` button.
 
-    ![Send ](postman/images/07_register_send.png)
+    ![Send ](documentation/postman/images/07_register_send.png)
 
     You will see a result similar to the following:
 
-    ![Result ](postman/images/08_register_result.png)
+    ![Result ](documentation/postman/images/08_register_result.png)
 
 3. Authenticate
 
     Click the `Authenticate` request on the collection.
 
     
-    ![Click Authenticate ](postman/images/09_authenticate_request.png)
+    ![Click Authenticate ](documentation/postman/images/09_authenticate_request.png)
 
     Go to Body -> GraphQL
 
-    ![Go to Body -> GraphQL ](postman/images/10_authenticate_body.png)
+    ![Go to Body -> GraphQL ](documentation/postman/images/10_authenticate_body.png)
 
     The `QUERY` and  `GRAPHQL VARIABLES` fields should already have sample content.
 
     You may change the variable values as you please.
 
-    ![Variables ](postman/images/11_authenticate_variables.png)
+    ![Variables ](documentation/postman/images/11_authenticate_variables.png)
 
     But take note to only change the values.
 
     Click the `Send` button.
 
-    ![Send ](postman/images/12_authenticate_send.png)
+    ![Send ](documentation/postman/images/12_authenticate_send.png)
 
     You will see a result similar to the following:
 
-    ![Result ](postman/images/13_authenticate_result.png)
+    ![Result ](documentation/postman/images/13_authenticate_result.png)
 
 
 
@@ -372,39 +425,39 @@ The application uses `GraphQL` thus we will assume each query and mutation as a 
  
     Click the `List GitHub Users` request on the collection.
 
-    ![Click List ](postman/images/14_list_request.png)
+    ![Click List ](documentation/postman/images/14_list_request.png)
 
     Go to the `Authorization` Tab.
 
-    ![Go to Authorization ](postman/images/15_list_authorization.png)
+    ![Go to Authorization ](documentation/postman/images/15_list_authorization.png)
 
     Set `Type` to `Bearer Token`.
 
-    ![Type to Bearer Token ](postman/images/16_list_type.png)
+    ![Type to Bearer Token ](documentation/postman/images/16_list_type.png)
 
     Paste the `Token` you got from a valid `Authenticate` call to the Token field.
 
-    ![Set Token ](postman/images/17_list_token.png)
+    ![Set Token ](documentation/postman/images/17_list_token.png)
 
     Go to Body -> GraphQL
 
-    ![Go to Body -> GraphQL ](postman/images/18_list_body.png)
+    ![Go to Body -> GraphQL ](documentation/postman/images/18_list_body.png)
 
     The `QUERY` and  `GRAPHQL VARIABLES` fields should already have sample content.
 
     You may change the variable values as you please.
 
-    ![Variables](postman/images/19_list_variables.png)
+    ![Variables](documentation/postman/images/19_list_variables.png)
 
     But take note to only change the values.
 
     Click the `Send` button.
 
-    ![Send ](postman/images/20_list_send.png)
+    ![Send ](documentation/postman/images/20_list_send.png)
 
     You will see a result similar to the following:
 
-    ![Results](postman/images/21_list_results.png)
+    ![Results](documentation/postman/images/21_list_results.png)
 
 
 ## Bonus Challenge (Optional)
