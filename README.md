@@ -460,4 +460,27 @@ The application uses `GraphQL` thus we will assume each query and mutation as a 
     ![Results](documentation/postman/images/21_list_results.png)
 
 
+### How to check if Redis had been integrated
+
+Since the `Redis` server is containerize, you will need to access the container shell to monitor your `Redis` server.
+
+First thing to do is to know the name of the container by using the following command:
+
+```shell
+./vendor/bin/sail ps
+```
+You will see a list of the running containers and take note of the `Name` of the `Redis` container.
+
+![Containers](documentation/redis/images/01_redis_ps.png)
+
+On the example, the name of the `Redis` server is `kumu-redis-1`.
+
+Based on that name, you can do the following command:
+```
+docker exec -it kumu-redis-1 redis-cli MONITOR
+```
+
+In any case your container is named something else, then replace the `kumu-redis-1` with the name of your containerfrom the comand above.
+
+
 ## Bonus Challenge (Optional)

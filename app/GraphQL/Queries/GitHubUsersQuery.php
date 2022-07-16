@@ -59,7 +59,6 @@ class GitHubUsersQuery extends Query
 
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
-        $currentUser = Auth::user();
         $gitHubUsers = [];
         // Connect to Redis.
         $redis = Redis::connection();
@@ -69,7 +68,7 @@ class GitHubUsersQuery extends Query
         // Loop to all usernames
         foreach($args['usernames'] as $gitHubUser) {
             // check if already cached
-            if($data = Redis::get($currentUser->id . "." . $gitHubUser)) {
+            if($data = Redis::get($gitHubUser)) {
                 $userData = json_decode($data, true);
             } else {
                 // Get data from GitHub.
@@ -100,7 +99,7 @@ class GitHubUsersQuery extends Query
                     // Gets the response bod text
                     $response = $response->getBody();
                     // Adds to Redis cache an should be kept for exactly 2 minutes.
-                    Redis::setex($currentUser->id . "." . $gitHubUser, 120, $response);    
+                    Redis::setex($gitHubUser, 120, $response);    
                     // sets the user data that is intended to be added to the return list.
                     $userData = json_decode($response, true);
                 } 
