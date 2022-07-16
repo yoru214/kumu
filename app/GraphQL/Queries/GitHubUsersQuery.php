@@ -76,33 +76,22 @@ class GitHubUsersQuery extends Query
                 $client = new \GuzzleHttp\Client();
                 $userEndPoint = "https://api.github.com/users/" . $gitHubUser;
                 try {
-                    try {
-                        $response = $client->request('GET', $userEndPoint, 
-                            [
-                                'variables'=> ['personalAccessToken' => config('GITHUB_ACCESS_TOKEN')]
-                            ]
-                        );
-                    // Catches Exceptions so process can continue when errors occurs.
-                    } catch (\GuzzleHttp\Exception\ClientException $e) {
-                        $response = $e->getResponse();
-                        // If username is not found in GitHub, which triggered the  404 not found status,
-                        // will log that user was not found.
-                        if ($response && $response->getStatusCode() == 404) {
-                            Log::notice($gitHubUser.' does not have a Github account.');
-                        } else {
-                            // Something is wrong
-                            return Error::createLocatedError('Something went wrong. Please check `laravel.log` for more details.');
-                        }
-                    }
-                } catch(\Exception $ex) {
-                    $response = $ex->getMessage();
-                    if($response) {
-                        return Error::createLocatedError($response);
-
+                    $response = $client->request('GET', $userEndPoint, 
+                        [
+                            'variables'=> ['personalAccessToken' => config('GITHUB_ACCESS_TOKEN')]
+                        ]
+                    );
+                // Catches Exceptions so process can continue when errors occurs.
+                } catch (\GuzzleHttp\Exception\ClientException $e) {
+                    $response = $e->getResponse();
+                    // If username is not found in GitHub, which triggered the  404 not found status,
+                    // will log that user was not found.
+                    if ($response && $response->getStatusCode() == 404) {
+                        Log::notice($gitHubUser.' does not have a Github account.');
                     } else {
+                        // Something is wrong
                         return Error::createLocatedError('Something went wrong. Please check `laravel.log` for more details.');
                     }
-
                 }
                 $statusCode = $response->getStatusCode();
                 // Should ensure that page is found or user exists befor adding to the list 
