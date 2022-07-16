@@ -480,7 +480,53 @@ Based on that name, you can do the following command:
 docker exec -it kumu-redis-1 redis-cli MONITOR
 ```
 
-In any case your container is named something else, then replace the `kumu-redis-1` with the name of your containerfrom the comand above.
+In any case your container is named something else, then replace the `kumu-redis-1` with the name of your container from the comand above.
 
 
 ## Bonus Challenge (Optional)
+
+### Introduction
+
+Technology to be used:
+- Any programming language
+
+<b>Calculate Hamming Distance</b>
+
+The Hamming distance between two integers is the number of positions at which the corresponding
+bits are different.
+
+Given two integers x and y, calculate the Hamming distance.
+
+<b>Note:</b>
+
+0 ≤ x, y < 231.
+
+<b>Example:</b>
+
+![Example](documentation/bonus/images/01_bonus_example.png)
+
+### How to Use
+
+Go to the directory where the project is cloned
+
+Example:
+
+![Directory](documentation/bonus/images/02_bonus_directory.png)
+
+Do the following command:
+
+```shell
+php artisan hammingdistance {x} {y}
+```
+
+Replace `{x}` and `{y}` with their respective values.
+
+Example:
+
+```shell
+php artisan hammingdistance 1 4
+```
+
+The output should be the Hamming distance of the values inputted.
+
+![Output](documentation/bonus/images/03_bonus_output.png)
