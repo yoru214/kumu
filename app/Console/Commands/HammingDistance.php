@@ -30,9 +30,10 @@ class HammingDistance extends Command
     public function handle()
     {
         // Validates if values are being pased
+        // max value of integer is 2147483647 which is requivalent to 2^31
         $validator = Validator::make($this->arguments(), [
-            'x' => 'required|integer|min:0|max:2147483648',
-            'y' => 'required|integer|min:0|max:2147483648'
+            'x' => 'required|integer|min:0|max:2147483647',
+            'y' => 'required|integer|min:0|max:2147483647'
         ]);
         // Checks if validation fails and shows specific errors
         if ($validator->fails()) {
